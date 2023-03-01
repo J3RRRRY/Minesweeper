@@ -28,10 +28,12 @@ public void setMines(int num)
   for(int i = 0; i < num; i++) {
     int r = (int)(Math.random() * NUM_ROWS);
     int c = (int)(Math.random() * NUM_COLS);
-    if(!mines.contains(mines)) {
+    if(!mines.contains(buttons[r][c])) {
       mines.add(buttons[r][c]);
       System.out.println(r + ", " + c);
       //System.out.println(mines);
+    } else {
+      i--;
     }
   }
 }
