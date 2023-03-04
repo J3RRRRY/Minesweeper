@@ -1,7 +1,7 @@
 import de.bezier.guido.*;
 //Declare and initialize constants NUM_ROWS and NUM_COLS = 20
-public final static int NUM_ROWS = 10;
-public final static int NUM_COLS = 10;
+public final static int NUM_ROWS = 40;
+public final static int NUM_COLS = 40;
 public boolean lost = false;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton>();//ArrayList of just the minesweeper buttons that are mined
@@ -9,7 +9,7 @@ private ArrayList <MSButton> mines = new ArrayList <MSButton>();//ArrayList of j
 
 void setup ()
 {
-    size(400, 400);
+    size(800, 800);
     textAlign(CENTER,CENTER);
     
     // make the manager
@@ -22,7 +22,7 @@ void setup ()
         buttons[r][c] = new MSButton(r, c);
       }
     }
-    setMines(5);
+    setMines(150);
 }
 public void setMines(int num)
 {
@@ -85,8 +85,8 @@ public class MSButton
     
     public MSButton ( int row, int col )
     {
-        width = 400/NUM_COLS;
-        height = 400/NUM_ROWS;
+        width = 800/NUM_COLS;
+        height = 800/NUM_ROWS;
         myRow = row;
         myCol = col; 
         x = myCol*width;
@@ -94,30 +94,34 @@ public class MSButton
         myLabel = "";
         flagged = clicked = false;
         Interactive.add( this ); // register it with the manager
-    }
-
+    }  
     // called by manager
     public void mousePressed () 
     {
-      if(mouseButton == LEFT && flagged == false) {
+      if(lost == false) {
+        if(mouseButton==LEFT && !buttons[myRow][myCol].isFlagged()) {
         clicked = true;
-      }
-      if(mouseButton == RIGHT && flagged == false && clicked == false) {
-        flagged = true; 
-      } else if(mouseButton == RIGHT && flagged == true) {
-        flagged = false;
-        clicked = false;
-      } else if(mines.contains(buttons[myRow][myCol])) {
-        displayLosingMessage();
-      } else if(countMines(myRow, myCol) != 0) {
-        String mines = countMines(myRow, myCol) + "";
-        myLabel = mines;
-      } else {
-        if(isValid(myRow, myCol-1) == true && flagged == false) {
-        buttons[myRow][myCol-1].mousePressed();  
         }
-        if(isValid(myRow, myCol+1) == true && flagged == false) {
-        buttons[myRow][myCol+1].mousePressed(); 
+        if(mouseButton==RIGHT && !buttons[myRow][myCol].isClicked()) {
+          flagged = !flagged;
+        } else if(mines.contains(buttons[myRow][myCol])) {
+          displayLosingMessage();
+        } else if(countMines(myRow, myCol) != 0) {
+          String mines = countMines(myRow, myCol) + "";
+          myLabel = mines;
+        } else {
+          if(isValid(myRow, myCol-1) == true && buttons[myRow][myCol-1].isClicked() == false) {
+          buttons[myRow][myCol-1].mousePressed();  
+          }
+          if(isValid(myRow-1, myCol) == true && buttons[myRow-1][myCol].isClicked() == false) {
+          buttons[myRow-1][myCol].mousePressed(); 
+          }
+          if(isValid(myRow, myCol+1) == true && buttons[myRow][myCol+1].isClicked() == false) {
+          buttons[myRow][myCol+1].mousePressed(); 
+          }
+          if(isValid(myRow+1, myCol) == true && buttons[myRow+1][myCol].isClicked() == false) {
+          buttons[myRow+1][myCol].mousePressed(); 
+          }
         }
       }
     }
@@ -134,18 +138,24 @@ public class MSButton
 
         rect(x, y, width, height);
         fill(0);
-        textSize(50);
+        textSize(10);
         text(myLabel,x+width/2,y+height/2);
         if(lost == true) {
-        //background(0);
-        fill(255);
-        text("You Lost", 200, 200);
+        buttons[19][16].setLabel("Y");
+        buttons[19][17].setLabel("O");
+        buttons[19][18].setLabel("U");
+        buttons[19][19].setLabel("L");
+        buttons[19][20].setLabel("O");
+        buttons[19][21].setLabel("S");
+        buttons[19][22].setLabel("E");
         for(int r = 0; r < NUM_ROWS; r++) {
           for(int c = 0; c < NUM_COLS; c++) {
             if(mines.contains(buttons[r][c]) && clicked == false)
             {
-                buttons[r][c].mousePressed();
+              lost = false;  
+              buttons[r][c].mousePressed();
             }
+            lost = true;
           }
         }
       }
@@ -161,5 +171,9 @@ public class MSButton
     public boolean isFlagged()
     {
         return flagged;
+    }
+    public boolean isClicked()
+    {
+        return clicked;
     }
 }
