@@ -38,13 +38,13 @@ public void setMines(int num)
   }
 }
 
-public void draw ()
+/*public void draw ()
 {
     background( 0 );
     if(isWon() == true)
         displayWinningMessage();
 }
-/*public boolean isWon()
+public boolean isWon()
 {
     int countFlagged = 0;
     int countClicked = 0;
