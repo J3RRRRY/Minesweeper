@@ -75,11 +75,6 @@ public boolean isWon()
     }
     return false;
 }
-
-public void displayLosingMessage()
-{
-    lost = true;
-}
 public void displayWinningMessage()
 {
     buttons[19][16].setLabel("Y");
@@ -132,13 +127,21 @@ public class MSButton
     public void mousePressed () 
     {
       if(lost == false) {
-        if(mouseButton==LEFT && !buttons[myRow][myCol].isFlagged()) {
-        clicked = true;
-        }
-        if(mouseButton==RIGHT && !buttons[myRow][myCol].isClicked()) {
-          flagged = !flagged;
+        //if(mouseButton==LEFT && !buttons[myRow][myCol].isFlagged()) {
+        //clicked = true;
+        //}
+        //if(mouseButton==RIGHT && !buttons[myRow][myCol].isClicked()) {
+        //  flagged = !flagged;
+          clicked = true;
+      if(mouseButton == RIGHT) {
+        if(flagged == true) {
+          flagged = false;
+          clicked = false;
+         }else {
+          flagged = true;
+         }  
         } else if(mines.contains(buttons[myRow][myCol])) {
-          displayLosingMessage();
+          lost = true;
         } else if(countMines(myRow, myCol) != 0) {
           String mines = countMines(myRow, myCol) + "";
           myLabel = mines;
