@@ -8,25 +8,22 @@ private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton>();//ArrayList of just the minesweeper buttons that are mined
 
 
-void setup ()
-{
-    size(800, 800);
-    textAlign(CENTER,CENTER);
-    
-    // make the manager
-    Interactive.make( this );
-    
-    //your code to initialize buttons goes here
-    buttons = new MSButton[NUM_ROWS][NUM_ROWS];
-    for(int r = 0;  r < NUM_ROWS; r++) {
-      for(int c = 0; c < NUM_COLS; c++) {
-        buttons[r][c] = new MSButton(r, c);
-      }
+void setup () {
+  size(800, 800);
+  textAlign(CENTER,CENTER);
+  // make the manager
+  Interactive.make( this );
+  //your code to initialize buttons goes here
+  buttons = new MSButton[NUM_ROWS][NUM_ROWS];
+  for(int r = 0;  r < NUM_ROWS; r++) {
+    for(int c = 0; c < NUM_COLS; c++) {
+      buttons[r][c] = new MSButton(r, c);
     }
-    setMines(NUM_MINES);
+  }
+  setMines(NUM_MINES);
 }
-public void setMines(int num)
-{
+
+public void setMines(int num) {
   for(int i = 0; i < num; i++) {
     int r = (int)(Math.random() * NUM_ROWS);
     int c = (int)(Math.random() * NUM_COLS);
@@ -38,20 +35,18 @@ public void setMines(int num)
   }
 }
 
-public void draw ()
-{
-    background( 0 );
-    if(isWon() == true)
-        displayWinningMessage();
+public void draw () {
+  background( 0 );
+  if(isWon() == true) {
+    displayWinningMessage();
+  }
 }
-public boolean isWon()
-{
-    int countFlagged = 0;
-    int countClicked = 0;
-    for(int r = 0; r < NUM_ROWS; r++)
-    {
-        for(int c = 0; c < NUM_COLS; c++)
-        {
+
+public boolean isWon() {
+  int countFlagged = 0;
+  int countClicked = 0;
+  for(int r = 0; r < NUM_ROWS; r++) {
+    for(int c = 0; c < NUM_COLS; c++) {
             if(buttons[r][c].isFlagged()) {
                 countFlagged++;
             }
@@ -144,16 +139,16 @@ public class MSButton
           String mines = countMines(myRow, myCol) + "";
           myLabel = mines;
         } else {
-          if(isValid(myRow, myCol-1) == true && buttons[myRow][myCol-1].isClicked() == false) {
+          if(isValid(myRow, myCol-1) == true && !buttons[myRow][myCol-1].isClicked()) {
           buttons[myRow][myCol-1].mousePressed();  
           }
-          if(isValid(myRow-1, myCol) == true && buttons[myRow-1][myCol].isClicked() == false) {
+          if(isValid(myRow-1, myCol) == true && !buttons[myRow-1][myCol].isClicked()) {
           buttons[myRow-1][myCol].mousePressed(); 
           }
-          if(isValid(myRow, myCol+1) == true && buttons[myRow][myCol+1].isClicked() == false) {
+          if(isValid(myRow, myCol+1) == true && !buttons[myRow][myCol+1].isClicked()) {
           buttons[myRow][myCol+1].mousePressed(); 
           }
-          if(isValid(myRow+1, myCol) == true && buttons[myRow+1][myCol].isClicked() == false) {
+          if(isValid(myRow+1, myCol) == true && !buttons[myRow+1][myCol].isClicked()) {
           buttons[myRow+1][myCol].mousePressed(); 
           }
         }
