@@ -2,7 +2,11 @@ import de.bezier.guido.*;
 //Declare and initialize constants NUM_ROWS and NUM_COLS = 20
 public final static int NUM_ROWS = 40;
 public final static int NUM_COLS = 40;
+public final static int NUM_MINES = 150;
 public boolean lost = false;
+public int c = 0;
+public int f = 0;
+public int m = 0;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton>();//ArrayList of just the minesweeper buttons that are mined
 
@@ -22,7 +26,7 @@ void setup ()
         buttons[r][c] = new MSButton(r, c);
       }
     }
-    setMines(150);
+    setMines(NUM_MINES);
 }
 public void setMines(int num)
 {
@@ -45,7 +49,30 @@ public void draw ()
 }
 public boolean isWon()
 {
-    //your code here
+    int countFlagged = 0;
+    int countClicked = 0;
+    for(int r = 0; r < NUM_ROWS; r++)
+    {
+        for(int c = 0; c < NUM_COLS; c++)
+        {
+            if(buttons[r][c].isFlagged()) {
+                countFlagged++;
+            }
+            else if(buttons[r][c].isClicked()) {
+                countClicked++;
+            }
+        }
+    }
+    int countMines = 0;
+    for(int i = 0; i < mines.size(); i++)
+    {
+        if((mines.get(i)).isFlagged()) {
+            countMines++;
+        }
+    }
+    if( (countMines == NUM_MINES && countFlagged + countClicked == NUM_ROWS*NUM_COLS && countMines == countFlagged)) {
+      return true;
+    }
     return false;
 }
 
@@ -55,7 +82,13 @@ public void displayLosingMessage()
 }
 public void displayWinningMessage()
 {
-    //your code here
+    buttons[19][16].setLabel("Y");
+    buttons[19][17].setLabel("O");
+    buttons[19][18].setLabel("U");
+    buttons[19][19].setLabel(" ");
+    buttons[19][20].setLabel("W");
+    buttons[19][21].setLabel("I");
+    buttons[19][22].setLabel("N");
 }
 public boolean isValid(int r, int c)
 {
@@ -144,10 +177,11 @@ public class MSButton
         buttons[19][16].setLabel("Y");
         buttons[19][17].setLabel("O");
         buttons[19][18].setLabel("U");
-        buttons[19][19].setLabel("L");
-        buttons[19][20].setLabel("O");
-        buttons[19][21].setLabel("S");
-        buttons[19][22].setLabel("E");
+        buttons[19][19].setLabel(" ");
+        buttons[19][20].setLabel("L");
+        buttons[19][21].setLabel("O");
+        buttons[19][22].setLabel("S");
+        buttons[19][23].setLabel("E");
         for(int r = 0; r < NUM_ROWS; r++) {
           for(int c = 0; c < NUM_COLS; c++) {
             if(mines.contains(buttons[r][c]) && clicked == false)
