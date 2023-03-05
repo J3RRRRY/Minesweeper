@@ -44,7 +44,7 @@ public void draw ()
     if(isWon() == true)
         displayWinningMessage();
 }
-public boolean isWon()
+/*public boolean isWon()
 {
     int countFlagged = 0;
     int countClicked = 0;
@@ -71,7 +71,7 @@ public boolean isWon()
       return true;
     }
     return false;
-}
+} */
 
 public void displayLosingMessage()
 {
