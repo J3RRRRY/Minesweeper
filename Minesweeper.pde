@@ -40,7 +40,7 @@ public void setMines(int num)
 
 public void draw ()
 {
-    //background( 0 );
+    background( 0 );
     //if(isWon() == true)
     //    displayWinningMessage();
 }
@@ -71,7 +71,7 @@ public void draw ()
       return true;
     }
     return false;
-} 
+} */
 
 public void displayLosingMessage()
 {
@@ -86,7 +86,7 @@ public void displayWinningMessage()
     buttons[19][20].setLabel("W");
     buttons[19][21].setLabel("I");
     buttons[19][22].setLabel("N");
-} */
+} 
 public boolean isValid(int r, int c)
 {
   if(r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS) {
