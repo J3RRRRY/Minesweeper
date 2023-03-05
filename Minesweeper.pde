@@ -7,7 +7,6 @@ public boolean lost = false;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton> ();//ArrayList of just the minesweeper buttons that are mined
 
-
 void setup ()
 {
   size(800, 800);
@@ -40,51 +39,22 @@ public void setMines(int num)
 
 public void draw ()
 {
-  background( 0 );
-  if (isWon() == true)
-    displayWinningMessage();
+    background( 0 );
+    if(isWon() == true)
+        displayWinningMessage();
 }
 public boolean isWon()
 {
-  int countFlagged = 0;
-  int countClicked = 0;
-  for (int r = 0; r < NUM_ROWS; r++)
-  {
-    for (int c = 0; c < NUM_COLS; c++)
-    {
-      if (buttons[r][c].isFlagged()) {
-        countFlagged++;
-      } else if (buttons[r][c].isClicked()) {
-        countClicked++;
-      }
-    }
-  }
-  int countMines = 0;
-  for (int i = 0; i < mines.size(); i++)
-  {
-    if ((mines.get(i)).isFlagged()) {
-      countMines++;
-    }
-  }
-  if ( (countMines == NUM_MINES && countFlagged + countClicked == NUM_ROWS*NUM_COLS && countMines == countFlagged)) {
-    return true;
-  }
-  return false;
+    //your code here
+    return false;
 }
-
 public void displayLosingMessage()
 {
-  lost = true;
+    //your code here
 }
 public void displayWinningMessage()
 {
-  buttons[19][16].setLabel("Y");
-  buttons[19][17].setLabel("O");
-  buttons[19][18].setLabel("U");
-  buttons[19][19].setLabel(" ");
-  buttons[19][20].setLabel("W");
-  buttons[19][21].setLabel("I");
-  buttons[19][22].setLabel("N");
+    //your code here
 }
 public boolean isValid(int r, int c)
 {
@@ -95,38 +65,33 @@ public boolean isValid(int r, int c)
 }
 public int countMines(int row, int col)
 {
-  int numMines = 0;
-  for (int r = row-1; r<=row+1; r++) {
-    for (int c = col-1; c<=col+1; c++) {
-      if (isValid(r, c) && mines.contains(buttons[r][c])) {
-        numMines++;
-      }
-    }
-  }
-  return numMines;
+    int numMines = 0;
+    //your code here
+    return numMines;
 }
 public class MSButton
 {
-  private int myRow, myCol;
-  private float x, y, width, height;
-  private boolean clicked, flagged;
-  private String myLabel;
+    private int myRow, myCol;
+    private float x,y, width, height;
+    private boolean clicked, flagged;
+    private String myLabel;
+    
+    public MSButton ( int row, int col )
+    {
+        width = 800/NUM_COLS;
+        height = 800/NUM_ROWS;
+        myRow = row;
+        myCol = col; 
+        x = myCol*width;
+        y = myRow*height;
+        myLabel = "";
+        flagged = clicked = false;
+        Interactive.add( this ); // register it with the manager
+    }
 
-  public MSButton ( int row, int col )
-  {
-    width = 800/NUM_COLS;
-    height = 800/NUM_ROWS;
-    myRow = row;
-    myCol = col; 
-    x = myCol*width;
-    y = myRow*height;
-    myLabel = "";
-    flagged = clicked = false;
-    Interactive.add( this ); // register it with the manager
-  }  
-  // called by manager
-  public void mousePressed () 
-  {
+    // called by manager
+    public void mousePressed () 
+    {
     if (lost == false) {
       if (mouseButton==LEFT && !buttons[myRow][myCol].isFlagged()) {
         clicked = true;
@@ -153,53 +118,32 @@ public class MSButton
         }
       }
     }
-  }
-  public void draw () 
-  {    
-    if (flagged)
-      fill(0);
-    else if ( clicked && mines.contains(this) ) 
-      fill(255, 0, 0);
-    else if (clicked)
-      fill( 200 );
-    else 
-    fill( 100 );
-
-    rect(x, y, width, height);
-    fill(0);
-    textSize(10);
-    text(myLabel, x+width/2, y+height/2);
-    if (lost == true) {
-      buttons[19][16].setLabel("Y");
-      buttons[19][17].setLabel("O");
-      buttons[19][18].setLabel("U");
-      buttons[19][19].setLabel(" ");
-      buttons[19][20].setLabel("L");
-      buttons[19][21].setLabel("O");
-      buttons[19][22].setLabel("S");
-      buttons[19][23].setLabel("E");
-      for (int r = 0; r < NUM_ROWS; r++) {
-        for (int c = 0; c < NUM_COLS; c++) {
-          if (mines.contains(buttons[r][c]) && clicked == false)
-          {
-            lost = false;  
-            buttons[r][c].mousePressed();
-          }
-          lost = true;
-        }
-      }
     }
-  }
-  public void setLabel(String newLabel)
-  {
-    myLabel = newLabel;
-  }
-  public boolean isFlagged()
-  {
-    return flagged;
-  }
-  public boolean isClicked()
-  {
-    return clicked;
-  }
+    public void draw () 
+    {    
+        if (flagged)
+            fill(0);
+        else if( clicked && mines.contains(this) ) 
+             fill(255,0,0);
+        else if(clicked)
+            fill( 200 );
+        else 
+            fill( 100 );
+
+        rect(x, y, width, height);
+        fill(0);
+        text(myLabel,x+width/2,y+height/2);
+    }
+    public void setLabel(String newLabel)
+    {
+        myLabel = newLabel;
+    }
+    public boolean isFlagged()
+    {
+        return flagged;
+    }
+    public boolean isClicked()
+    {
+      return clicked;
+    }
 }
