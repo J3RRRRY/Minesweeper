@@ -195,10 +195,6 @@ public class MSButton
     {
         myLabel = newLabel;
     }
-    public void setLabel(int newLabel)
-    {
-        myLabel = ""+ newLabel;
-    }
     public boolean isFlagged()
     {
         return flagged;
