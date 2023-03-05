@@ -70,7 +70,7 @@ public void displayWinningMessage() {
   buttons[19][16].setLabel("Y");
   buttons[19][17].setLabel("O");
   buttons[19][18].setLabel("U");
-  //buttons[19][19].setLabel(" ");
+  buttons[19][19].setLabel(" ");
   buttons[19][20].setLabel("W");
   buttons[19][21].setLabel("I");
   buttons[19][22].setLabel("N");
@@ -171,7 +171,7 @@ public class MSButton
         buttons[19][16].setLabel("Y");
         buttons[19][17].setLabel("O");
         buttons[19][18].setLabel("U");
-        //buttons[19][19].setLabel(" ");
+        buttons[19][19].setLabel(" ");
         buttons[19][20].setLabel("L");
         buttons[19][21].setLabel("O");
         buttons[19][22].setLabel("S");
