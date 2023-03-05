@@ -5,7 +5,7 @@ public final static int NUM_COLS = 40;
 public final static int NUM_MINES = 150;
 public boolean lost = false;
 private MSButton[][] buttons; //2d array of minesweeper buttons
-private ArrayList <MSButton> mines = new ArrayList <MSButton> ();//ArrayList of just the minesweeper buttons that are mined
+private ArrayList <MSButton> mines = new ArrayList <MSButton>();//ArrayList of just the minesweeper buttons that are mined
 
 
 void setup ()
@@ -71,7 +71,7 @@ public boolean isWon()
       return true;
     }
     return false;
-} */
+} 
 
 public void displayLosingMessage()
 {
@@ -86,7 +86,7 @@ public void displayWinningMessage()
     buttons[19][20].setLabel("W");
     buttons[19][21].setLabel("I");
     buttons[19][22].setLabel("N");
-}
+} */
 public boolean isValid(int r, int c)
 {
   if(r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS) {
