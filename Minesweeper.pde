@@ -229,3 +229,5 @@ public class MSButton
     public void setRevealed(boolean reveal)
     {
       revealed = reveal;
+    }
+}
