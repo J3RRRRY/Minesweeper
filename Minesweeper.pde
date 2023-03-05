@@ -47,32 +47,31 @@ public boolean isWon() {
   int countClicked = 0;
   for(int r = 0; r < NUM_ROWS; r++) {
     for(int c = 0; c < NUM_COLS; c++) {
-            if(buttons[r][c].isFlagged()) {
-                countFlagged++;
-            }
-            else if(buttons[r][c].isClicked()) {
-                countClicked++;
-            }
-        }
+      if(buttons[r][c].isFlagged()) {
+        countFlagged += 1;
+      } else if(buttons[r][c].isClicked()) {
+       countClicked += 1;
+      }
     }
-    int countMines = 0;
-    for(int i = 0; i < mines.size(); i++)
-    {
-        if((mines.get(i)).isFlagged()) {
-            countMines++;
-        }
+  }
+  int countMines = 0;
+  for(int i = 0; i < mines.size(); i++) {
+    if((mines.get(i)).isFlagged()) {
+      countMines += 1;
     }
-    if( (countMines == NUM_MINES && countFlagged + countClicked == NUM_ROWS*NUM_COLS && countMines == countFlagged)) {
-      return true;
-    }
-    return false;
+  }
+  if(countMines == NUM_MINES && countFlagged + countClicked == NUM_ROWS*NUM_COLS && countMines == countFlagged) {
+    return true;
+  }
+  return false;
 }
+
 public void displayWinningMessage()
 {
     buttons[19][16].setLabel("Y");
     buttons[19][17].setLabel("O");
     buttons[19][18].setLabel("U");
-    buttons[19][19].setLabel(" ");
+    //buttons[19][19].setLabel(" ");
     buttons[19][20].setLabel("W");
     buttons[19][21].setLabel("I");
     buttons[19][22].setLabel("N");
@@ -173,7 +172,7 @@ public class MSButton
         buttons[19][16].setLabel("Y");
         buttons[19][17].setLabel("O");
         buttons[19][18].setLabel("U");
-        buttons[19][19].setLabel(" ");
+        //buttons[19][19].setLabel(" ");
         buttons[19][20].setLabel("L");
         buttons[19][21].setLabel("O");
         buttons[19][22].setLabel("S");
