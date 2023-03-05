@@ -66,23 +66,23 @@ public boolean isWon() {
   return false;
 }
 
-public void displayWinningMessage()
-{
-    buttons[19][16].setLabel("Y");
-    buttons[19][17].setLabel("O");
-    buttons[19][18].setLabel("U");
-    //buttons[19][19].setLabel(" ");
-    buttons[19][20].setLabel("W");
-    buttons[19][21].setLabel("I");
-    buttons[19][22].setLabel("N");
+public void displayWinningMessage() {
+  buttons[19][16].setLabel("Y");
+  buttons[19][17].setLabel("O");
+  buttons[19][18].setLabel("U");
+  //buttons[19][19].setLabel(" ");
+  buttons[19][20].setLabel("W");
+  buttons[19][21].setLabel("I");
+  buttons[19][22].setLabel("N");
 }
-public boolean isValid(int r, int c)
-{
+
+public boolean isValid(int r, int c) {
   if(r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS) {
     return true;
   }
   return false;
 }
+
 public int countMines(int row, int col)
 {
   int numMines = 0;
@@ -135,8 +135,7 @@ public class MSButton
         } else if(mines.contains(buttons[myRow][myCol])) {
           lost = true;
         } else if(countMines(myRow, myCol) != 0) {
-          String mines = countMines(myRow, myCol) + "";
-          myLabel = mines;
+          setLabel(countMines(myRow, myCol));
         } else {
           if(isValid(myRow, myCol-1) == true && !buttons[myRow][myCol-1].isClicked()) {
           buttons[myRow][myCol-1].mousePressed();  
